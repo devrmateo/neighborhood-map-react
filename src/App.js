@@ -1,13 +1,15 @@
-import React, { Component } from 'react';
-import Container from './components/container';
-import './App.css';
+import React from 'react';
+import MapContainer from './components/mapContainer';
+import LocationList from './components/locations';
 
-class App extends Component {
+class App extends React.Component {
+
   render() {
 
     return (
       <div className="App">
-        <Container />
+        <LocationList />
+        <MapContainer />
       </div>
     );
   }
