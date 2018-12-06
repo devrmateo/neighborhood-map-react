@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-class locationsList extends React.Component {
+class LocationsList extends React.Component {
      render() {
           return (
                <p>List</p>
@@ -9,4 +9,4 @@ class locationsList extends React.Component {
      }
 }
 
-export default locationsList;
+export default LocationsList;

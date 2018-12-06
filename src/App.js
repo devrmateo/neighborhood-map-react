@@ -1,6 +1,6 @@
 import React from 'react';
 import MapContainer from './components/mapContainer';
-import LocationList from './components/locations';
+import LocationsList from './components/locations';
 
 class App extends React.Component {
 
@@ -8,7 +8,7 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <LocationList />
+        <LocationsList />
         <MapContainer />
       </div>
     );
