@@ -3,27 +3,6 @@ html, body, #root {
      width: 100%;
 }
 
-.App, #wrapper {
-     height: 100%;
-     width: 100%;
-}
-
-.App {
-     display: flex;
-     flex-wrap: wrap;
-     justify-content: space-between;
-}
-
-.App > div {
-     height: 100%;
-     width: 75%;
-}
-
-#map {
-     height: 100%;
-     width: 100%;
-}
-
 body {
   margin: 0;
   padding: 0;
