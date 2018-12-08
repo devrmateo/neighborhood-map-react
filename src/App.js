@@ -5,6 +5,20 @@ import './App.css';
 
 class App extends React.Component {
 
+  state = {
+    locations: []
+  }
+
+  componentDidMount() {
+    fetch('https://api.foursquare.com/v2/venues/explore?client_id=JEASTQIYAOQHC5EJ45NM4QUSD2AS11EADPF51VDM42O4Q13A&client_secret=GEMFOAQ5IBMRS1ROLEFMRMNEZSV0R3QYPZEMLALQJNUFANCH&v=20180323&limit=15&ll=40.7243,-74.0018&near=Agoura Hills, CA')
+    .then((response) => response.json())
+    .then((data) => console.log(data.response.groups[0].items))
+    .then((data) => this.setState({
+      locations: data
+    }))
+    .catch((error) => console.log(error));
+  }
+
   render() {
 
     return (
