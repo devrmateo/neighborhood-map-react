@@ -5,9 +5,3 @@
      flex-wrap: wrap;
      justify-content: space-between;
 }
-
-/*Select the map container, as it is the second, and last div of the App component*/
-.App > div:last-of-type {
-     height: 100%;
-     width: 75%;
-}
