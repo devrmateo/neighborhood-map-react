@@ -1,3 +1,18 @@
 .locationsListWrapper {
-     width: 20%;
+     width: 30%;
+}
+
+h3 {
+     margin-left: 1em;
+}
+
+ul.locationsList {
+     list-style: none;
+     padding-left: 0;
+     margin-left: 1em;
+     margin-right: 1em;
+}
+
+.locationsListItem {
+     padding: .5em;
 }

@@ -16,7 +16,6 @@ export class App extends React.Component {
     )
     .then((data) => {
       let fetchedLocations = [];
-      console.log(this.state.locations);
       for (let i = 0; i < data.response.groups[0].items.length; i++) {
         fetchedLocations.push(data.response.groups[0].items[i].venue)
       }
@@ -27,7 +26,6 @@ export class App extends React.Component {
         locations: fetchedLocations
       })
     )
-    .then(() => console.log(this.state.locations))
     .catch((error) => console.log(error));
   }
 

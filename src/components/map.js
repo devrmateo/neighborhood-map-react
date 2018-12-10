@@ -37,7 +37,6 @@ class Map extends React.Component {
      }
 
      render() {
-
           return (
                <div id='map' ref='map'></div>
           )
