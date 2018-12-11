@@ -1,10 +1,9 @@
 import React from 'react';
-import {GoogleApiWrapper} from 'google-maps-react';
 import Map from './components/map';
 import LocationsList from './components/locations';
 import './App.css';
 
-export class App extends React.Component {
+class App extends React.Component {
 
   state = {
     locations: []
@@ -44,6 +43,4 @@ export class App extends React.Component {
   }
 }
 
-export default GoogleApiWrapper({
-  apiKey: 'AIzaSyBYxtGxA3B4KgCSBExLmK_lD_lq5u-xkMA'
-})(App)
+export default App;
