@@ -1,5 +1,5 @@
 import React from 'react';
-import Map from './components/map';
+import MapWrapper from './components/mapWrapper';
 import LocationsList from './components/locations';
 import './App.css';
 
@@ -34,8 +34,7 @@ class App extends React.Component {
         <LocationsList
           locations={this.state.locations}
         />
-        <Map
-          google={this.props.google}
+        <MapWrapper
           locations={this.state.locations}
         />
       </div>
