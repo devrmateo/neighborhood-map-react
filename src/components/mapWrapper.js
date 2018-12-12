@@ -12,10 +12,13 @@ export class MapWrapper extends React.Component {
           return (
                <div id="mapWrapper">
                     <Map
+                         google={this.props.google}
+                         initialCenter={{
+                              lat: 34.15334,
+                              lng: -118.761676
+                         }}
                          role="application"
                          aria-label="map"
-                         center={{lat: 34.15334, lng: -118.761676}}
-                         google={this.props.google}
                          locations={this.props.locations}
                     >
 
