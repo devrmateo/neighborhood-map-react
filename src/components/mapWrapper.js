@@ -21,9 +21,11 @@ export class MapWrapper extends React.Component {
                          return (
                               <Marker
                                    key={location.id}
-                                   position={{lat: location.lat, lng: location.lng}}
-                              />
-                         )
+                                   position={{
+                                        lat: location.location.lat,
+                                        lng: location.location.lng
+                                   }}
+                              />)
                     })}
 
                     </Map>

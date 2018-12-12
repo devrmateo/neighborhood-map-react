@@ -35,33 +35,11 @@ class Map extends React.Component {
           }
      }
 
-     renderChildren() {
-          console.log(this.props.children);
-          const children = this.props.children;
-          if (!children) {
-               return;
-          }
-
-          return React.Children.map((children, c) => {
-               return React.cloneElement(c, {
-                    map: this.map,
-                    google: this.props.google,
-                    mapCenter: {
-                         lat: 34.15334,
-                         lng: -118.761676
-                    },
-                    locations: this.props.locations
-               })
-          })
-     }
-
      render() {
 
 
           return (
-               <div id='map' ref='map'>
-                    {this.renderChildren()}
-               </div>
+               <div id='map' ref='map'></div>
           )
      }
 }
