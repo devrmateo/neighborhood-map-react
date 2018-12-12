@@ -1,6 +1,6 @@
 import React from 'react';
-import MapWrapper from './components/mapWrapper';
 import LocationsList from './components/locations';
+import MapWrapper from './components/mapWrapper';
 import './App.css';
 
 class App extends React.Component {
