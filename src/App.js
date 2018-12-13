@@ -8,12 +8,12 @@ class App extends React.Component {
   state = {
     locations: [],
     filteredLocations: [],
-    lat: 40.7243,
-    lng: -74.0018
+    lat: 34.15334,
+    lng: -118.761676
   }
 
   componentDidMount = () => {
-    fetch('https://api.foursquare.com/v2/venues/explore?client_id=JEASTQIYAOQHC5EJ45NM4QUSD2AS11EADPF51VDM42O4Q13A&client_secret=GEMFOAQ5IBMRS1ROLEFMRMNEZSV0R3QYPZEMLALQJNUFANCH&v=20180323&limit=15&ll=40.7243,-74.0018&near=Agoura Hills, CA')
+    fetch(`https://api.foursquare.com/v2/venues/explore?client_id=JEASTQIYAOQHC5EJ45NM4QUSD2AS11EADPF51VDM42O4Q13A&client_secret=GEMFOAQ5IBMRS1ROLEFMRMNEZSV0R3QYPZEMLALQJNUFANCH&v=20180323&limit=15&ll=${this.state.lat},${this.state.lng}`)
     .then((response) => response.json()
     )
     .then((data) => {

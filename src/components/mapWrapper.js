@@ -7,26 +7,21 @@ export class MapWrapper extends React.Component {
      render() {
 
           const locations = this.props.locations;
-          let lat = this.props.lat;
-          console.log(lat);
-          let lng = this.props.lng;
-          console.log(lng);
-          let center = {
+          const lat = this.props.lat;
+          const lng = this.props.lng;
+          const center = {
                lat: lat,
                lng: lng
-          };
-          console.log(center);
+          }
 
           return (
-               <div id="mapWrapper">
+
                     <Map
-                         google={this.props.google}
-                         initialCenter={{
-                              lat: lat,
-                              lng: lng
-                         }}
                          role="application"
                          aria-label="map"
+                         google={this.props.google}
+                         initialCenter={center}
+                         zoom={13}
                     >
 
                     {locations.map((location) => {
@@ -42,7 +37,7 @@ export class MapWrapper extends React.Component {
 
                     </Map>
 
-               </div>
+
 
           )
      }
