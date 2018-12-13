@@ -6,7 +6,10 @@ import './App.css';
 class App extends React.Component {
 
   state = {
-    locations: []
+    locations: [],
+    filteredLocations: [],
+    lat: 40.7243,
+    lng: -74.0018
   }
 
   componentDidMount = () => {
@@ -20,22 +23,36 @@ class App extends React.Component {
       }
       return fetchedLocations;
     })
-    .then((fetchedLocations) =>
+    .then((fetchedLocations) => {
       this.setState({
-        locations: fetchedLocations
-      })
-    )
-    .catch((error) => alert("FourSquare data could not be retrieved."));
+        locations: fetchedLocations,
+        filteredLocations: this.filterLocations(fetchedLocations, "")
+      });
+    })
+    .catch((error) => alert("There was an error loading FourSquare data."));
+  }
+
+  updateQuery = (query) => {
+    this.setState({
+      filteredLocations: this.filterLocations(this.state.locations, query)
+    });
+  }
+
+  filterLocations = (locations, query) => {
+    return locations.filter((location) => location.name.toLowerCase().includes(query.toLowerCase()));
   }
 
   render() {
     return (
       <div className="App">
         <LocationsList
-          locations={this.state.locations}
+          locations={this.state.filteredLocations}
+          filterLocations={this.updateQuery}
         />
         <MapWrapper
-          locations={this.state.locations}
+          locations={this.state.filteredLocations}
+          lat={this.state.lat}
+          lng={this.state.lng}
         />
       </div>
     );
