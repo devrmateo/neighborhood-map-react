@@ -32,6 +32,8 @@ export class MapWrapper extends React.Component {
                                         lat: location.location.lat,
                                         lng: location.location.lng
                                    }}
+                                   title={location.name}
+                                   name={location.name}
                               />)
                     })}
 

@@ -24,9 +24,10 @@ class App extends React.Component {
       return fetchedLocations;
     })
     .then((fetchedLocations) => {
+      const locations = fetchedLocations;
       this.setState({
-        locations: fetchedLocations,
-        filteredLocations: this.filterLocations(fetchedLocations, "")
+        locations,
+        filteredLocations: this.filterLocations(locations, "")
       });
     })
     .catch((error) => alert("There was an error loading FourSquare data."));
