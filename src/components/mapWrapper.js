@@ -1,8 +1,19 @@
 import React from 'react';
-import {Map, GoogleApiWrapper} from 'google-maps-react';
-import {Marker} from 'google-maps-react/dist/components/Marker';
+import {Map, InfoWindow, GoogleApiWrapper} from 'google-maps-react';
+import {Marker,} from 'google-maps-react/dist/components/Marker';
 
 export class MapWrapper extends React.Component {
+     state = {
+          showingInfoWindow: false,
+          activeMarker: {},
+          selectedPlace: {},
+     };
+
+     onMarkerClick = (props, marker, e) =>
+          this.setState ({
+               activeMarker: marker,
+               showingInfoWindow: true
+          });
 
      render() {
 
@@ -34,8 +45,18 @@ export class MapWrapper extends React.Component {
                                    }}
                                    title={location.name}
                                    name={location.name}
+                                   onClick={this.onMarkerClick}
                               />)
                     })}
+
+                    <InfoWindow
+                         marker={this.state.activeMarker}
+                         visible={this.state.showingInfoWindow}>
+                              <div>
+                                   <h1>{this.state.selectedPlace.name}</h1>
+                              </div>
+
+                    </InfoWindow>
 
                     </Map>
 
