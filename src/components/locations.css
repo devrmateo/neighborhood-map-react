@@ -1,3 +1,16 @@
 .locationsWrapper {
      width: 25%;
 }
+
+.locationsHeader {
+     margin-left: 1em;
+}
+
+.locationsList {
+     list-style-type: none;
+     padding-left: 1em;
+}
+
+.listItem {
+     margin-bottom: .5em;
+}
