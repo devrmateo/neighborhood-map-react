@@ -34,7 +34,11 @@ class LocationsList extends React.Component {
                                         className="locationsListItem"
                                         key={location.id}
                                    >
-                                        {location.name}
+                                        <button
+                                             key={location.id}
+                                        >
+                                             {location.name}
+                                        </button>
                                    </li>
                               )
                          })}
