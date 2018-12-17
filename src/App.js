@@ -51,7 +51,8 @@ class App extends React.Component {
           filterLocations={this.updateQuery}
         />
         <MapWrapper
-          locations={this.state.filteredLocations}
+          locations={this.state.locations}
+          filteredLocations={this.state.filteredLocations}
           lat={this.state.lat}
           lng={this.state.lng}
         />

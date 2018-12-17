@@ -13,6 +13,6 @@
 /*This selects the second child div of the App component, which houses the map.  This selector needs to be created inside the App component in order to have the map appear correctly.*/
 
 .App > div:last-of-type {
-     height: 100%;
+     height: 100vh;
      width: 70%;
 }

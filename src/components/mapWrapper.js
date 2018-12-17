@@ -1,28 +1,40 @@
 import React from 'react';
-import {Map, InfoWindow, GoogleApiWrapper} from 'google-maps-react';
+import {Map, GoogleApiWrapper} from 'google-maps-react';
 import {Marker,} from 'google-maps-react/dist/components/Marker';
 
 export class MapWrapper extends React.Component {
      state = {
-          showingInfoWindow: false,
-          activeMarker: {},
-          selectedPlace: {},
-     };
+          map: null,
+          markers: [],
+          markerProps: [],
+          activeMarker: null,
+          activeMarkerProps: null,
+          showingInfoWindow: false
+     }
 
-     onMarkerClick = (props, marker, e) =>
-          this.setState ({
-               activeMarker: marker,
-               showingInfoWindow: true
+     mapReady = (props, map) => {
+          this.setState({
+               map
           });
+          this.updateMarkers(this.props.locations);
+     }
+
+     updateMarkers = (locations) => {
+
+     }
 
      render() {
 
-          const locations = this.props.locations;
+          const locations = this.props.filteredLocations;
           const lat = this.props.lat;
           const lng = this.props.lng;
           const center = {
                lat: lat,
                lng: lng
+          }
+          const style = {
+               height: '100vh',
+               width: '100vw'
           }
 
           return (
@@ -30,6 +42,8 @@ export class MapWrapper extends React.Component {
                     <Map
                          role="application"
                          aria-label="map"
+                         style={style}
+                         onReady={this.mapReady}
                          google={this.props.google}
                          initialCenter={center}
                          zoom={13}
@@ -48,15 +62,6 @@ export class MapWrapper extends React.Component {
                                    onClick={this.onMarkerClick}
                               />)
                     })}
-
-                    <InfoWindow
-                         marker={this.state.activeMarker}
-                         visible={this.state.showingInfoWindow}>
-                              <div>
-                                   <h1>{this.state.selectedPlace.name}</h1>
-                              </div>
-
-                    </InfoWindow>
 
                     </Map>
 
