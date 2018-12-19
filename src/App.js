@@ -7,9 +7,11 @@ class App extends React.Component {
 
   state = {
     locations: [],
-    filteredLocations: [],
+    filteredLocations: null,
     lat: 34.15334,
-    lng: -118.761676
+    lng: -118.761676,
+    selectedId: null,
+    selectedMarker: null
   }
 
   componentDidMount = () => {
@@ -35,6 +37,7 @@ class App extends React.Component {
 
   updateQuery = (query) => {
     this.setState({
+      selectedIndex: null,
       filteredLocations: this.filterLocations(this.state.locations, query)
     });
   }
@@ -43,18 +46,46 @@ class App extends React.Component {
     return locations.filter((location) => location.name.toLowerCase().includes(query.toLowerCase()));
   }
 
+  markers = []
+
+  addMarker = (marker) => {
+    if (this.markers.indexOf(marker) === -1 && marker !== null) {
+      this.markers.push(marker);
+    }
+  }
+
+  clickMarker = (id) => {
+    const marker = this.markers.filter((marker) => marker.marker.id === id)[0];
+    console.log(marker);
+    this.setState({
+      selectedId: id,
+      selectedMarker: marker
+    });
+  }
+
+  clickListLocation = (index) => {
+    this.setState({
+      selectedIndex: index
+    });
+  }
+
   render() {
     return (
       <div className="App">
         <LocationsList
           locations={this.state.filteredLocations}
           filterLocations={this.updateQuery}
+          clickMarker={this.clickMarker}
+          clickListLocation={this.clickListLocation}
         />
         <MapWrapper
-          locations={this.state.locations}
-          filteredLocations={this.state.filteredLocations}
+          locations={this.state.filteredLocations}
           lat={this.state.lat}
           lng={this.state.lng}
+          addMarker={this.addMarker}
+          clickMarker={this.clickMarker}
+          selectedMarker={this.state.selectedMarker}
+          selectedIndex={this.state.selectedIndex}
         />
       </div>
     );

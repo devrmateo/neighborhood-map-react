@@ -1,6 +1,6 @@
 import React from 'react';
 import {Map, InfoWindow, GoogleApiWrapper} from 'google-maps-react';
-import {Marker,} from 'google-maps-react/dist/components/Marker';
+import {Marker} from 'google-maps-react/dist/components/Marker';
 import './mapWrapper.css';
 
 export class MapWrapper extends React.Component {
@@ -8,16 +8,34 @@ export class MapWrapper extends React.Component {
           map: null,
           markers: [],
           markerProps: [],
-          activeMarker: null,
+          selectedMarker: null,
           activeMarkerProps: null,
           showingInfoWindow: false
+     }
+
+     componentWillReceiveProps = (props) => {
+          this.updateMarkers(this.props.locations);
+
+          console.log(props);
+
+          this.setState({
+               selectedMarker: props.selectedMarker
+          });
+
+          console.log(this.state.markerProps);
+          console.log(this.state.markers);
+
+          this.onMarkerClick(this.state.markerProps[props.selectedIndex], this.state.markers[props.selectedIndex]);
+     }
+
+     saveMarker = (marker) => {
+          this.props.addMarker(marker);
      }
 
      mapReady = (props, map) => {
           this.setState({
                map
           });
-          this.updateMarkers(this.props.locations);
      }
 
      closeInfoWindow = () => {
@@ -65,7 +83,7 @@ export class MapWrapper extends React.Component {
                markerProps.push(mProps);
 
                let animation = this.props.google.maps.Animation.DROP;
-               let marker = this.props.google.maps.Marker({
+               let marker = new this.props.google.maps.Marker({
                     map: this.state.map,
                     position: location.position,
                     animation
@@ -84,9 +102,13 @@ export class MapWrapper extends React.Component {
           });
      }
 
+     addMarker = (marker) => {
+          this.props.addMarker(marker);
+     }
+
      render() {
 
-          const locations = this.props.filteredLocations;
+          const locations = this.props.locations;
           const lat = this.props.lat;
           const lng = this.props.lng;
           const center = {
@@ -96,25 +118,28 @@ export class MapWrapper extends React.Component {
 
           let amProps = this.state.activeMarkerProps;
 
-          return (
 
+
+          return (
                <div
                     id="map"
                     role="application"
                     aria-label="map"
                >
                     <Map
-                         onReady={this.mapReady}
                          google={this.props.google}
+                         onReady={this.mapReady}
                          initialCenter={center}
                          zoom={13}
                          onClick={this.closeInfoWindow}
                     >
 
-                    {locations.map((location) => {
+                    {locations && locations.map((location, index) => {
                          return (
                               <Marker
+                                   id={location.id}
                                    key={location.id}
+                                   index={index}
                                    position={{
                                         lat: location.location.lat,
                                         lng: location.location.lng
@@ -122,6 +147,7 @@ export class MapWrapper extends React.Component {
                                    title={location.name}
                                    name={location.name}
                                    onClick={this.onMarkerClick}
+                                   ref={this.addMarker}
                               />)
                     })}
 

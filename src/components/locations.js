@@ -28,14 +28,16 @@ class LocationsList extends React.Component {
                          value={this.state.query}
                     />
                     <ul className="locationsList">
-                         {locations.map((location) => {
+                         {locations && locations.map((location, index) => {
                               return (
                                    <li
                                         className="locationsListItem"
-                                        key={location.id}
+                                        key={index}
                                    >
                                         <button
-                                             key={location.id}
+                                             key={index}
+                                             index={index}
+                                             onClick={(e) => this.props.clickListLocation(index)}
                                         >
                                              {location.name}
                                         </button>
