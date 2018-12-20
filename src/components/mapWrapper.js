@@ -14,7 +14,9 @@ export class MapWrapper extends React.Component {
      }
 
      componentWillReceiveProps = (props) => {
-          this.updateMarkers(this.props.locations);
+          if (props.selectedIndex) {
+                this.updateMarkers(this.props.locations);
+          }
 
           console.log(props);
 
