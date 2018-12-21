@@ -58,8 +58,7 @@ class App extends React.Component {
     const marker = this.markers.filter((marker) => marker.marker.id === id)[0];
     console.log(marker);
     this.setState({
-      selectedId: id,
-      selectedMarker: marker
+      selectedId: id
     });
   }
 
