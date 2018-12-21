@@ -5,6 +5,7 @@ import './App.css';
 class App extends Component {
 
   state = {
+    query: '',
     locations: [],
     filteredLocations: [],
     lat: 34.15334,
@@ -20,9 +21,10 @@ class App extends Component {
     .then((data) => {
       console.log(data.response.groups[0].items);
       const locations = data.response.groups[0].items;
+      //Set the filtered location list to be equal to the location list to begin with, so that the list will populate before any filtering is done.
       this.setState({
         locations,
-        filteredLocations: this.filterLocations(locations, '')
+        filteredLocations: locations
       });
     })
     .then(() => this.displayMap())
@@ -34,14 +36,20 @@ class App extends Component {
     window.initMap = this.initMap;
   }
 
-  updateLocations = (query) => {
-    this.setState({
-      filteredLocations: this.filterLocations(this.state.locations, query),
-    });
-  }
+  filterLocations = (query) => {
+    let locations;
+    if (query) {
+      locations = this.state.locations.filter((location) => location.venue.name.toLowerCase().includes(query.toLowerCase()))
+    } else {
+      locations = this.state.locations;
+      console.log(locations);
+    }
 
-  filterLocations = (locations, query) => {
-    return locations.filter((location) => location.venue.name.toLowerCase().includes(query.toLowerCase()));
+    this.setState({
+      filteredLocations: locations,
+      query
+    });
+
   }
 
   initMap = () => {
@@ -81,7 +89,7 @@ class App extends Component {
       <div className="App">
         <LocationsList
           locations={this.state.filteredLocations}
-          filterLocations={this.updateLocations}
+          filterLocations={this.filterLocations}
         />
         <div id="map"></div>
       </div>
