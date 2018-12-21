@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import LocationsList from './components/locations';
+import Map from './components/mapDisplay';
 import './App.css';
 
 class App extends Component {
@@ -101,7 +102,7 @@ class App extends Component {
           locations={this.state.filteredLocations}
           filterLocations={this.filterLocations}
         />
-        <div id="map"></div>
+        <Map />
       </div>
     );
   }
