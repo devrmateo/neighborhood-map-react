@@ -5,6 +5,7 @@ import './App.css';
 class App extends Component {
 
   state = {
+    map: null,
     query: '',
     locations: [],
     filteredLocations: [],
@@ -19,7 +20,6 @@ class App extends Component {
       return response.json();
     })
     .then((data) => {
-      console.log(data.response.groups[0].items);
       const locations = data.response.groups[0].items;
       //Set the filtered location list to be equal to the location list to begin with, so that the list will populate before any filtering is done.
       this.setState({
@@ -39,17 +39,23 @@ class App extends Component {
   filterLocations = (query) => {
     let locations;
     if (query) {
-      locations = this.state.locations.filter((location) => location.venue.name.toLowerCase().includes(query.toLowerCase()))
+      locations = this.state.locations.filter((location) => location.venue.name.toLowerCase().includes(query.toLowerCase()));
     } else {
       locations = this.state.locations;
-      console.log(locations);
     }
+
+    this.state.markers.forEach((marker) => {
+      if (marker.title.toLowerCase().includes(query.toLowerCase())) {
+        marker.setMap(this.state.map);
+      } else {
+        marker.setMap(null);
+      }
+    });
 
     this.setState({
       filteredLocations: locations,
       query
     });
-
   }
 
   initMap = () => {
@@ -59,6 +65,10 @@ class App extends Component {
       lng: this.state.lng},
       zoom: 12
     });
+
+    this.setState({
+      map
+    })
 
     const largeInfowindow = new window.google.maps.InfoWindow();
 
@@ -70,7 +80,7 @@ class App extends Component {
         lat: this.state.locations[i].venue.location.lat,
         lng: this.state.locations[i].venue.location.lng
       };
-      const title = this.state.locations[i].name;
+      const title = this.state.locations[i].venue.name;
       // Create a marker per location, and put into markers array.
       const marker = new window.google.maps.Marker({
         map,
