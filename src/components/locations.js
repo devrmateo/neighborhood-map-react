@@ -37,7 +37,7 @@ class LocationsList extends React.Component {
                                         <button
                                              key={index}
                                              index={index}
-                                             onClick={(e) => this.props.clickListLocation(index)}
+                                             onClick={(e) => this.props.clickListLocation(index, location.id)}
                                         >
                                              {location.name}
                                         </button>

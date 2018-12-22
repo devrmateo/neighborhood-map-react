@@ -58,11 +58,13 @@ class App extends React.Component {
     const marker = this.markers.filter((marker) => marker.marker.id === id)[0];
     console.log(marker);
     this.setState({
-      selectedId: id
+      selectedId: id,
+      selectedMarker: marker
     });
   }
 
-  clickListLocation = (index) => {
+  clickListLocation = (index, id) => {
+    this.clickMarker(id);
     this.setState({
       selectedIndex: index
     });
@@ -72,6 +74,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <LocationsList
+          selectedMarker={this.state.selectedMarker}
           locations={this.state.filteredLocations}
           filterLocations={this.updateQuery}
           clickMarker={this.clickMarker}

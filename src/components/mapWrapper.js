@@ -14,9 +14,8 @@ export class MapWrapper extends React.Component {
      }
 
      componentWillReceiveProps = (props) => {
-          if (props.selectedIndex) {
-                this.updateMarkers(this.props.locations);
-          }
+
+          this.updateMarkers(this.props.locations);
 
           console.log(props);
 
@@ -41,10 +40,10 @@ export class MapWrapper extends React.Component {
      }
 
      closeInfoWindow = () => {
-          this.state.activeMarker && this.state.activeMarker.setAnimation(null);
+          this.state.selectedMarker && this.state.selectedMarker.setAnimation(null);
           this.setState({
                showingInfoWindow: false,
-               activeMarker: null,
+               selectedMarker: null,
                activeMarkerProps: null
           })
      }
@@ -54,7 +53,7 @@ export class MapWrapper extends React.Component {
 
           this.setState({
                showingInfoWindow: true,
-               activeMarker: marker,
+               selectedMarker: marker,
                activeMarkerProps: props
           });
      }
@@ -77,6 +76,7 @@ export class MapWrapper extends React.Component {
                let mProps = {
                     key: index,
                     index,
+
                     name: location.name,
                     title: location.name,
                     position: position,
@@ -88,7 +88,8 @@ export class MapWrapper extends React.Component {
                let marker = new this.props.google.maps.Marker({
                     map: this.state.map,
                     position: location.position,
-                    animation
+                    animation,
+                    id: location.id
                });
 
                marker.addListener('click', () => {
@@ -102,6 +103,7 @@ export class MapWrapper extends React.Component {
                markers,
                markerProps
           });
+          console.log(this.state.markers);
      }
 
      addMarker = (marker) => {
