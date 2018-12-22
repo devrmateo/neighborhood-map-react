@@ -19,7 +19,12 @@ class LocationsList extends React.Component {
                               return <li
                                         key={location.venue.id}
                                         className="listItem">
-                              {location.venue.name}
+                              <button
+                                   onClick={() => this.props.onListItemClick(location.venue.id)}
+
+                              >
+                                   {location.venue.name}
+                              </button>
                               </li>
                          })}
                     </ul>

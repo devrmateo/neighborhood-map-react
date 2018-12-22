@@ -12,7 +12,8 @@ class App extends Component {
     filteredLocations: [],
     lat: 34.15334,
     lng: -118.761676,
-    markers: []
+    markers: [],
+    selectedMarker: null
   }
 
   componentDidMount = () => {
@@ -67,11 +68,11 @@ class App extends Component {
       zoom: 12
     });
 
+    const infowindow = new window.google.maps.InfoWindow();
     this.setState({
-      map
-    })
-
-    const largeInfowindow = new window.google.maps.InfoWindow();
+      map,
+      infowindow
+    });
 
     const markers = this.state.markers;
 
@@ -93,21 +94,39 @@ class App extends Component {
       // Push the marker to our array of markers.
       markers.push(marker);
       marker.addListener('click', () => {
-        this.populateInfoWindow(map, marker, largeInfowindow);
+        this.populateInfoWindow(marker, infowindow);
           });
     }
+
+     this.setState({
+      markers
+    });
   }
 
-  populateInfoWindow = (map, marker, infowindow) => {
+  populateInfoWindow = (marker, infowindow) => {
     // Check to make sure the infowindow is not already opened on this marker.
     if (infowindow.marker !== marker) {
       // Clear the infowindow content to give the streetview time to load.
       infowindow.setContent(`${marker.title}`);
       infowindow.marker = marker;
       // Make sure the marker property is cleared if the infowindow is closed.
+      infowindow.addListener('closeclick', function() {
+        infowindow.marker = null;
+      });
       // Open the infowindow on the correct marker.
-      infowindow.open(map, marker);
+      infowindow.open(this.state.map, marker);
+      console.log(marker);
     }
+  }
+
+  onListItemClick = (id) => {
+    console.log(id);
+    console.log(this.state.markers);
+    let markers = this.state.markers;
+    let filtered = markers.filter((marker) => marker.id === id)[0];
+    console.log(filtered);
+
+    this.populateInfoWindow(filtered, this.state.infowindow);
   }
 
   render() {
@@ -116,6 +135,7 @@ class App extends Component {
         <LocationsList
           locations={this.state.filteredLocations}
           filterLocations={this.filterLocations}
+          onListItemClick={this.onListItemClick}
         />
         <Map />
       </div>
