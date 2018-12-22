@@ -92,6 +92,21 @@ class App extends Component {
       });
       // Push the marker to our array of markers.
       markers.push(marker);
+      marker.addListener('click', () => {
+        this.populateInfoWindow(map, marker, largeInfowindow);
+          });
+    }
+  }
+
+  populateInfoWindow = (map, marker, infowindow) => {
+    // Check to make sure the infowindow is not already opened on this marker.
+    if (infowindow.marker !== marker) {
+      // Clear the infowindow content to give the streetview time to load.
+      infowindow.setContent(`${marker.title}`);
+      infowindow.marker = marker;
+      // Make sure the marker property is cleared if the infowindow is closed.
+      // Open the infowindow on the correct marker.
+      infowindow.open(map, marker);
     }
   }
 
