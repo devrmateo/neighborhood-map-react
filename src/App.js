@@ -64,7 +64,7 @@ class App extends Component {
     center: {
       lat: this.state.lat,
       lng: this.state.lng},
-      zoom: 12
+      zoom: 13
     });
 
     const infowindow = new window.google.maps.InfoWindow();
