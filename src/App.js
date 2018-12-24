@@ -103,6 +103,7 @@ class App extends Component {
   }
 
   populateInfoWindow = (marker, infowindow) => {
+
     // Check to make sure the infowindow is not already opened on this marker.
     if (infowindow.marker !== marker) {
       // Clear the infowindow content to give the streetview time to load.
@@ -129,11 +130,10 @@ class App extends Component {
   onListItemClick = (id) => {
     let markers = this.state.markers;
     let filtered = markers.filter((marker) => marker.id === id)[0];
-    console.log(filtered);
 
     this.populateInfoWindow(filtered, this.state.infowindow);
     filtered.setAnimation(window.google.maps.Animation.BOUNCE);
-    setTimeout(() => {filtered.setAnimation(-1)}, 2000);
+    setTimeout(() => {filtered.setAnimation(-1)}, 1400);
   }
 
   render() {
