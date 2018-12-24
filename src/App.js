@@ -133,7 +133,7 @@ class App extends Component {
 
     this.populateInfoWindow(filtered, this.state.infowindow);
     filtered.setAnimation(window.google.maps.Animation.BOUNCE);
-    setTimeout(() => {filtered.setAnimation(-1)}, 1400);
+    setTimeout(() => {filtered.setAnimation(-1)}, 725);
   }
 
   render() {
