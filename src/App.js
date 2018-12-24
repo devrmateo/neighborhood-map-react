@@ -13,7 +13,6 @@ class App extends Component {
     lat: 34.15334,
     lng: -118.761676,
     markers: [],
-    selectedMarker: null
   }
 
   componentDidMount = () => {
@@ -94,8 +93,8 @@ class App extends Component {
       // Push the marker to our array of markers.
       markers.push(marker);
       marker.addListener('click', () => {
-        this.populateInfoWindow(marker, infowindow);
-          });
+        this.populateInfoWindow(marker, this.state.infowindow);
+      });
     }
 
      this.setState({
@@ -109,24 +108,32 @@ class App extends Component {
       // Clear the infowindow content to give the streetview time to load.
       infowindow.setContent(`${marker.title}`);
       infowindow.marker = marker;
+
       // Make sure the marker property is cleared if the infowindow is closed.
-      infowindow.addListener('closeclick', function() {
+      infowindow.addListener('closeclick', () => {
         infowindow.marker = null;
+        marker.setAnimation(-1);
       });
+
+      this.state.map.addListener('click', () => {
+        infowindow.close();
+        infowindow.marker = null;
+        marker.setAnimation(-1);
+      })
+
       // Open the infowindow on the correct marker.
       infowindow.open(this.state.map, marker);
-      console.log(marker);
     }
   }
 
   onListItemClick = (id) => {
-    console.log(id);
-    console.log(this.state.markers);
     let markers = this.state.markers;
     let filtered = markers.filter((marker) => marker.id === id)[0];
     console.log(filtered);
 
     this.populateInfoWindow(filtered, this.state.infowindow);
+    filtered.setAnimation(window.google.maps.Animation.BOUNCE);
+    setTimeout(() => {filtered.setAnimation(-1)}, 2000);
   }
 
   render() {
