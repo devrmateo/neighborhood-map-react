@@ -9,9 +9,11 @@ class LocationsList extends React.Component {
           return (
                <div className="locationsWrapper">
                     <h3 className="locationsHeader">Locations</h3>
+                    <p className="fourSquare"><em>Locations provided by FourSqure</em></p>
                     <input
                          type="text"
                          value={this.props.query}
+                         placeholder="Filter Locations"
                          onChange={(e) => this.props.filterLocations(e.target.value)}
                     />
                     <ul className="locationsList">

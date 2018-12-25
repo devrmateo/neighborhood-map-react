@@ -1,16 +1,69 @@
+@media screen and (max-width: 499px) {
+     .locationsWrapper {
+          width: 150px;
+     }
+
+     .listItem {
+          font-size: .5em;
+          padding-left: .25em;
+     }
+}
+
+@media screen and (min-width: 500px) {
+     .locationsWrapper {
+          width: 200px;
+     }
+
+     .listItem {
+          font-size: 1em;
+          padding-left: .25em;
+     }
+}
+
 .locationsWrapper {
-     width: 25%;
+     margin-left: .5em;
+     margin-right: .5em;
 }
 
 .locationsHeader {
+     margin-left: .5em;
+     margin-bottom: 0;
+     color: #45494f;
+}
+
+.fourSquare {
      margin-left: 1em;
+     font-size: .7em;
+}
+
+input {
+     display: block;
+     width: 150px;
+     margin-top: 0;
 }
 
 .locationsList {
+     padding: 0;
      list-style-type: none;
-     padding-left: 1em;
+     text-align: left;
 }
 
 .listItem {
+     text-align: left;
      margin-bottom: .5em;
+
+}
+
+button {
+     font-size: .75em;
+     padding: 0;
+     font-weight: bold;
+     border: none;
+     cursor: pointer;
+     color: #45494f;
+
+}
+
+button:hover {
+     color: #c62727;
 }

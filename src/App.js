@@ -88,7 +88,7 @@ class App extends Component {
         position: position,
         title: title,
         animation: window.google.maps.Animation.DROP,
-        id: this.state.locations[i].venue.id
+        id: this.state.locations[i].venue.id,
       });
       // Push the marker to our array of markers.
       markers.push(marker);
@@ -107,7 +107,18 @@ class App extends Component {
     // Check to make sure the infowindow is not already opened on this marker.
     if (infowindow.marker !== marker) {
       // Clear the infowindow content to give the streetview time to load.
-      infowindow.setContent(`${marker.title}`);
+      console.log(marker.id);
+      const location = this.state.locations.filter((location) => location.venue.id === marker.id)[0].venue;
+
+      console.log(location);
+
+      infowindow.setContent(`
+                              <h3>${location.name}</h3>
+                              <div>${location.location.formattedAddress[0]}</div>
+                              <div>${location.location.formattedAddress[1]}</div>
+                              <div>${location.location.formattedAddress[2]}</div>
+                              <p><em>Locations provided by FourSquare</em></p>
+                            `);
       infowindow.marker = marker;
 
       // Make sure the marker property is cleared if the infowindow is closed.
@@ -139,6 +150,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <h1 className="title">Around the Neighborhood</h1>
+        <h4 className="subtitle">Things to do in Agoura Hills, California</h4>
         <LocationsList
           locations={this.state.filteredLocations}
           filterLocations={this.filterLocations}
