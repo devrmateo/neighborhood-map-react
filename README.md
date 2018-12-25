@@ -1,44 +1,31 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Neighborhood Map
+___
 
-## Available Scripts
+This is a neighborhood map application that displays data from several different locations in Agoura Hills, California on an interactive Google Map, including their location and address.
 
-In the project directory, you can run:
+# How to run this application locally
+___
 
-### `npm start`
+In order to run this application on your local computer, do the following:
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. Point your browser to [https://github.com/webdevmateo/neighborhood-map-react](https://github.com/webdevmateo/neighborhood-map-react).
+2. Once there, click on the green "Clone or download" button.
+3. Then, you can either clone the repository or download a .zip file to your local computer.
+4. When you have local access, do the following:
+     - Launch a command line tool, such as Terminal.
+     - Navigate to the project's root directory, and run the following command:
+          * `npm start`
+     - Visit the site in your browser at `http://localhost:3000`.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+# Dependencies
+___
 
-### `npm test`
+This project was created using the following dependencies:
+* [Create React App](https://github.com/facebook/create-react-app)
+* [Google Maps JavaScript API](https://developers.google.com/maps/documentation/javascript/tutorial)
+* [FourSquare](https://foursquare.com/)
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# License
+___
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+* [MIT License](LICENSE.txt)
