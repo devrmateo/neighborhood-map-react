@@ -4,7 +4,7 @@ class LocationsList extends React.Component {
 
      render() {
 
-          const locations = this.props.locations;
+          const {locations} = this.props;
 
           return (
                <div className="locationsWrapper">

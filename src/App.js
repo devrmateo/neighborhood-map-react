@@ -22,7 +22,6 @@ class App extends Component {
     })
     .then((data) => {
       const locations = data.response.groups[0].items;
-      //Set the filtered location list to be equal to the location list to begin with, so that the list will populate before any filtering is done.
       this.setState({
         locations,
         filteredLocations: locations
@@ -107,10 +106,7 @@ class App extends Component {
     // Check to make sure the infowindow is not already opened on this marker.
     if (infowindow.marker !== marker) {
       // Clear the infowindow content to give the streetview time to load.
-      console.log(marker.id);
       const location = this.state.locations.filter((location) => location.venue.id === marker.id)[0].venue;
-
-      console.log(location);
 
       infowindow.setContent(`
                               <h3>${location.name}</h3>
