@@ -42,6 +42,30 @@ input {
      margin-top: 0;
 }
 
+.drawer {
+  width: 250px;
+  position: absolute;
+  -webkit-transform: translate(-250px, 0);
+  transform: translate(-250px, 0);
+}
+
+@media screen and (min-width: 400px) {
+     .drawer {
+          position: relative;
+          width: 100%;
+          padding-left: .8em;
+          -webkit-transform: translate(0, 0);
+          transform: translate(0, 0);
+     }
+}
+
+.open {
+  -webkit-transform: translate(0, 0);
+  transform: translate(0, 0);
+  background-color: #55586b;
+}
+
+
 .locationsList {
      padding: 0;
      list-style-type: none;

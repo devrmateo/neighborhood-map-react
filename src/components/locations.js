@@ -16,22 +16,24 @@ class LocationsList extends React.Component {
                          placeholder="Filter Locations"
                          onChange={(e) => this.props.filterLocations(e.target.value)}
                     />
-                    <ul className="locationsList">
-                         {locations && locations.map((location) => {
-                              return <li
-                                        key={location.venue.id}
-                                        className="listItem">
-                              <button
-                                   onClick={() => this.props.onListItemClick(location.venue.id)}
+                    <nav>
+                         <ul className="locationsList">
+                              {locations && locations.map((location) =>
+                                   {return <li
+                                             key={location.venue.id}
+                                             className="listItem">
+                                                  <button
+                                                       onClick={() => this.props.onListItemClick(location.venue.id)}
 
-                              >
-                                   {location.venue.name}
-                              </button>
-                              </li>
-                         })}
-                    </ul>
+                                                  >
+                                                       {location.venue.name}
+                                                  </button>
+                                             </li>
+                                        })}
+                         </ul>
+                    </nav>
                </div>
-               );
+          );
      }
 }
 
