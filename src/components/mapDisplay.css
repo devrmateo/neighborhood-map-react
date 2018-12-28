@@ -1,12 +1,24 @@
 @media screen and (max-width: 499px) {
      #map {
-          width: 150px;
+          width: 100vw;
      }
 }
 
 @media screen and (min-width: 500px) {
      #map {
-          width: 55vw;
+          width: 57vw;
+     }
+}
+
+@media screen and (min-width: 850px) {
+     #map {
+          width: 72vw;
+     }
+}
+
+@media screen and (min-width: 1000px) {
+     #map {
+          width: 720px;
      }
 }
 

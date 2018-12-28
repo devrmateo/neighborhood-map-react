@@ -1,6 +1,14 @@
 @media screen and (max-width: 499px) {
-     .locationsWrapper {
-          width: 150px;
+
+     .locations {
+          flex-basis: 100%;
+     }
+
+     .listWrapper {
+          position: absolute;
+          -webkit-transform: translate(-350px, 0);
+          transform: translate(-350px, 0);
+
      }
 
      .listItem {
@@ -10,8 +18,11 @@
 }
 
 @media screen and (min-width: 500px) {
-     .locationsWrapper {
-          width: 200px;
+
+     .listWrapper {
+          position: relative;
+          -webkit-transform: translate(0, 0);
+          transform: translate(0, 0);
      }
 
      .listItem {
@@ -20,7 +31,8 @@
      }
 }
 
-.locationsWrapper {
+.locations {
+     width: 200px;
      margin-left: .5em;
      margin-right: .5em;
 }
@@ -31,9 +43,18 @@
      color: #45494f;
 }
 
-.fourSquare {
-     margin-left: 1em;
-     font-size: .7em;
+.fa {
+     flex-basis: 50%;
+     margin-left: auto;
+     margin-right: 100vw;
+     font-size: 1.5em;
+     margin-bottom: .5em;
+}
+
+@media screen and (min-width: 499px) {
+     .fa {
+          display: none;
+     }
 }
 
 input {
@@ -42,21 +63,9 @@ input {
      margin-top: 0;
 }
 
-.drawer {
-  width: 250px;
-  position: absolute;
-  -webkit-transform: translate(-250px, 0);
-  transform: translate(-250px, 0);
-}
-
-@media screen and (min-width: 400px) {
-     .drawer {
-          position: relative;
-          width: 100%;
-          padding-left: .8em;
-          -webkit-transform: translate(0, 0);
-          transform: translate(0, 0);
-     }
+.fourSquare {
+     margin-left: .25em;
+     font-size: .7em;
 }
 
 .open {
@@ -64,7 +73,6 @@ input {
   transform: translate(0, 0);
   background-color: #55586b;
 }
-
 
 .locationsList {
      padding: 0;
