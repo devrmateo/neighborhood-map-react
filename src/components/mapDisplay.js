@@ -9,7 +9,9 @@ class Map extends Component {
                     id="map"
                     role="application"
                     aria-label="map"
-               ></div>
+                    onClick={this.props.closeDrawer}
+               >
+               </div>
           )
      }
 }

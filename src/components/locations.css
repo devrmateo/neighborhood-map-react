@@ -1,25 +1,32 @@
 @media screen and (max-width: 499px) {
 
      .locations {
+          margin: 0;
           flex-basis: 100%;
      }
 
-     .listWrapper {
+     .drawer {
           position: absolute;
-          -webkit-transform: translate(-350px, 0);
-          transform: translate(-350px, 0);
+          width: 200px;
+          padding-left: 2em;
+          -webkit-transform: translate(-200px, 0);
+          transform: translate(-200px, 0);
 
      }
 
      .listItem {
-          font-size: .5em;
+          font-size: 1em;
           padding-left: .25em;
      }
 }
 
 @media screen and (min-width: 500px) {
-
-     .listWrapper {
+     .locations {
+          width: 200px;
+          margin-left: .5em;
+          margin-right: .5em;
+}
+     .drawer {
           position: relative;
           -webkit-transform: translate(0, 0);
           transform: translate(0, 0);
@@ -31,12 +38,6 @@
      }
 }
 
-.locations {
-     width: 200px;
-     margin-left: .5em;
-     margin-right: .5em;
-}
-
 .locationsHeader {
      margin-left: .5em;
      margin-bottom: 0;
@@ -45,10 +46,15 @@
 
 .fa {
      flex-basis: 50%;
-     margin-left: auto;
+     margin-left: 1.5em;
      margin-right: 100vw;
      font-size: 1.5em;
      margin-bottom: .5em;
+     cursor: pointer;
+}
+
+.fa:hover {
+     color: #E8453C;
 }
 
 @media screen and (min-width: 499px) {
@@ -69,9 +75,10 @@ input {
 }
 
 .open {
-  -webkit-transform: translate(0, 0);
-  transform: translate(0, 0);
-  background-color: #55586b;
+     z-index: 1000;
+     background: white;
+     -webkit-transform: translate(0, 0);
+     transform: translate(0, 0);
 }
 
 .locationsList {
@@ -83,7 +90,7 @@ input {
 .listItem {
      text-align: left;
      margin-bottom: .5em;
-
+     padding-bottom: .5em;
 }
 
 button {

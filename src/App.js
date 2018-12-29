@@ -141,7 +141,20 @@ class App extends Component {
     this.populateInfoWindow(filtered, this.state.infowindow);
     filtered.setAnimation(window.google.maps.Animation.BOUNCE);
     setTimeout(() => {filtered.setAnimation(-1)}, 725);
+    this.closeDrawer();
   }
+
+  toggleDrawer = () => {
+        const drawer = document.querySelector('.drawer');
+        drawer.classList.toggle('open');
+  }
+
+  closeDrawer = () => {
+      const drawer = document.querySelector('.drawer');
+      if (drawer.classList.contains('open')) {
+         drawer.classList.remove('open');
+      }
+   }
 
   render() {
     return (
@@ -152,8 +165,11 @@ class App extends Component {
           locations={this.state.filteredLocations}
           filterLocations={this.filterLocations}
           onListItemClick={this.onListItemClick}
+          toggleDrawer={this.toggleDrawer}
         />
-        <Map />
+        <Map
+          closeDrawer={this.closeDrawer}
+        />
       </div>
     );
   }

@@ -6,6 +6,7 @@ import { faBars } from '@fortawesome/free-solid-svg-icons'
 
 class LocationsList extends React.Component {
 
+
      render() {
 
           const {locations} = this.props;
@@ -16,15 +17,16 @@ class LocationsList extends React.Component {
                   <FontAwesomeIcon
                     icon={faBars}
                     className="fa"
+                    onClick={this.props.toggleDrawer}
                   />
-                  <div className="listWrapper">
+                  <div className="drawer">
                     <input
                          type="text"
                          value={this.props.query}
                          placeholder="Filter Locations"
                          onChange={(e) => this.props.filterLocations(e.target.value)}
                     />
-                    <p className="fourSquare"><em>Locations provided by FourSqure</em></p>
+                    <p className="fourSquare"><em>Locations provided by FourSquare</em></p>
                     <nav>
                          <ul className="locationsList">
                               {locations && locations.map((location) =>

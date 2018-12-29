@@ -6,19 +6,19 @@
 
 @media screen and (min-width: 500px) {
      #map {
-          width: 57vw;
+          width: 56vw;
      }
 }
 
-@media screen and (min-width: 850px) {
+@media screen and (min-width: 750px) {
      #map {
-          width: 72vw;
+          width: 70vw;
      }
 }
 
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 1200px) {
      #map {
-          width: 720px;
+          width: 840px;
      }
 }
 
