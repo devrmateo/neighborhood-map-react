@@ -5,6 +5,7 @@ import { faBars } from '@fortawesome/free-solid-svg-icons'
 
 
 const LocationsList = (props) => {
+
      const {locations} = props;
 
      return (

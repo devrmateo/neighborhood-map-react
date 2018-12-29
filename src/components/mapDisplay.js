@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './mapDisplay.css';
 
-class Map extends Component {
+const Map = (props) => {
 
-     render() {
-          return(
+     return (
                <div
                     id="map"
                     role="application"
                     aria-label="map"
-                    onClick={this.props.closeDrawer}
+                    onClick={props.closeDrawer}
                >
                </div>
-          )
-     }
+
+
+     )
 }
 
 export default Map;
