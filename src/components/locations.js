@@ -4,49 +4,42 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 
 
-class LocationsList extends React.Component {
+const LocationsList = (props) => {
+     const {locations} = props;
 
-
-     render() {
-
-          const {locations} = this.props;
-
-
-          return (
-               <div className="locations">
-                  <FontAwesomeIcon
+     return (
+          <div className="locations">
+               <FontAwesomeIcon
                     icon={faBars}
                     className="fa"
-                    onClick={this.props.toggleDrawer}
-                  />
-                  <div className="drawer">
+                    onClick={props.toggleDrawer}
+               />
+               <div className="drawer">
                     <input
                          type="text"
-                         value={this.props.query}
+                         value={props.query}
                          placeholder="Filter Locations"
-                         onChange={(e) => this.props.filterLocations(e.target.value)}
+                         onChange={(e) => props.filterLocations(e.target.value)}
                     />
                     <p className="fourSquare"><em>Locations provided by FourSquare</em></p>
                     <nav>
                          <ul className="locationsList">
                               {locations && locations.map((location) =>
-                                   {return <li
-                                             key={location.venue.id}
-                                             className="listItem">
+                                   {return   <li
+                                                  key={location.venue.id}
+                                                  className="listItem">
                                                   <button
-                                                       onClick={() => this.props.onListItemClick(location.venue.id)}
-
+                                                       onClick={() => props.onListItemClick(location.venue.id)}
                                                   >
                                                        {location.venue.name}
                                                   </button>
                                              </li>
-                                        })}
-                              </ul>
-                         </nav>
-                    </div>
+                                   })}
+                         </ul>
+                    </nav>
                </div>
-          );
-     }
+          </div>
+     );
 }
 
 export default LocationsList;
