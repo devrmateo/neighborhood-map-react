@@ -23,7 +23,8 @@ ___
 This project was created using the following dependencies:
 * [Create React App](https://github.com/facebook/create-react-app)
 * [Google Maps JavaScript API](https://developers.google.com/maps/documentation/javascript/tutorial)
-* [FourSquare](https://foursquare.com/)
+* [FourSquare Places API](https://developer.foursquare.com/docs/api)
+* [FontAwesome React Component](https://github.com/FortAwesome/react-fontawesome)
 
 # License
 ___
