@@ -29,6 +29,7 @@ class App extends Component {
           const venue = place.venue;
           venues.push(venue);
         })
+        this.venues = venues;
         this.google = google;
         this.markers = [];
         this.infowindow = new google.maps.InfoWindow();
@@ -50,87 +51,45 @@ class App extends Component {
       // Push the marker to our array of markers.
         this.markers.push(marker);
         marker.addListener('click', () => {
-          this.populateInfoWindow(this, this.infowindow);
+          this.populateInfoWindow(marker, this.infowindow);
         });
         });
         this.setState({
           filtered: venues,
         })
-        console.log(this.state.filtered);
-      });
+      })
+      .catch((error) => alert('There was an error loading the page.'));
   }
 
   filterLocations = (query) => {
-    let locations;
+    let filtered;
     if (query) {
-      locations = this.state.locations.filter((location) => location.venue.name.toLowerCase().includes(query.toLowerCase()));
+      filtered = this.venues.filter((location) => location.name.toLowerCase().includes(query.toLowerCase()));
     } else {
-      locations = this.state.locations;
+      filtered = this.venues;
     }
 
-    this.state.markers.forEach((marker) => {
+    this.markers.forEach((marker) => {
       if (marker.title.toLowerCase().includes(query.toLowerCase())) {
-        marker.setMap(this.state.map);
+        marker.setMap(this.map);
       } else {
         marker.setMap(null);
       }
     });
 
     this.setState({
-      filteredLocations: locations,
+      filtered,
       query
     });
   }
 
-  initMap = () => {
-    const map = new window.google.maps.Map(document.getElementById('map'), {
-    center: {
-      lat: this.state.lat,
-      lng: this.state.lng},
-      zoom: 13
-    });
-
-    const infowindow = new window.google.maps.InfoWindow();
-    this.setState({
-      map,
-      infowindow
-    });
-
-    const markers = this.state.markers;
-
-    for (let i = 0; i < this.state.locations.length; i++) {
-      // Get the position from the location array.
-      const position = {
-        lat: this.state.locations[i].venue.location.lat,
-        lng: this.state.locations[i].venue.location.lng
-      };
-      const title = this.state.locations[i].venue.name;
-      // Create a marker per location, and put into markers array.
-      const marker = new window.google.maps.Marker({
-        map,
-        position: position,
-        title: title,
-        animation: window.google.maps.Animation.DROP,
-        id: this.state.locations[i].venue.id,
-      });
-      // Push the marker to our array of markers.
-      markers.push(marker);
-      marker.addListener('click', () => {
-        this.populateInfoWindow(marker, this.state.infowindow);
-      });
-    }
-
-     this.setState({
-      markers
-    });
-  }
 
   populateInfoWindow = (marker, infowindow) => {
 
     // Check to make sure the infowindow is not already opened on this marker.
     if (infowindow.marker !== marker) {
       // Clear the infowindow content to give the streetview time to load.
-      const location = this.state.locations.filter((location) => location.venue.id === marker.id)[0].venue;
+      const location = this.state.filtered.filter((location) => location.id === marker.id)[0];
 
       infowindow.setContent(`
                               <h3>${location.name}</h3>
@@ -147,22 +106,22 @@ class App extends Component {
         marker.setAnimation(-1);
       });
 
-      this.state.map.addListener('click', () => {
+      this.map.addListener('click', () => {
         infowindow.close();
         infowindow.marker = null;
         marker.setAnimation(-1);
       })
 
       // Open the infowindow on the correct marker.
-      infowindow.open(this.state.map, marker);
+      infowindow.open(this.map, marker);
     }
   }
 
   onListItemClick = (id) => {
-    let markers = this.state.markers;
+    let markers = this.markers;
     let filtered = markers.filter((marker) => marker.id === id)[0];
 
-    this.populateInfoWindow(filtered, this.state.infowindow);
+    this.populateInfoWindow(filtered, this.infowindow);
     filtered.setAnimation(window.google.maps.Animation.BOUNCE);
     setTimeout(() => {filtered.setAnimation(-1)}, 725);
     this.closeDrawer();
@@ -183,8 +142,16 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <LocationsList />
-        <Map />
+        <LocationsList
+          query={this.state.query}
+          filtered={this.state.filtered}
+          filterLocations={this.filterLocations}
+          onListItemClick={this.onListItemClick}
+          toggleDrawer={this.toggleDrawer}
+        />
+        <Map
+          closeDrawer={this.closeDrawer}
+        />
       </div>
     );
   }

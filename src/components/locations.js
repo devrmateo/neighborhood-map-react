@@ -6,7 +6,7 @@ import { faBars } from '@fortawesome/free-solid-svg-icons'
 
 const LocationsList = (props) => {
 
-     const {locations} = props;
+     const {filtered} = props;
 
      return (
           <div className="locations">
@@ -25,14 +25,14 @@ const LocationsList = (props) => {
                     <p className="fourSquare"><em>Locations provided by FourSquare</em></p>
                     <nav>
                          <ul className="locationsList">
-                              {locations && locations.map((location) =>
+                              {filtered && filtered.map((location) =>
                                    {return   <li
-                                                  key={location.venue.id}
+                                                  key={location.id}
                                                   className="listItem">
                                                   <button
-                                                       onClick={() => props.onListItemClick(location.venue.id)}
+                                                       onClick={() => props.onListItemClick(location.id)}
                                                   >
-                                                       {location.venue.name}
+                                                       {location.name}
                                                   </button>
                                              </li>
                                    })}
