@@ -19,3 +19,15 @@ export function getPlaces(lat, lng) {
       return response.json();
     })
 }
+
+export function toggleDrawer() {
+        const drawer = document.querySelector('.drawer');
+        drawer.classList.toggle('open');
+  }
+
+export function closeDrawer() {
+      const drawer = document.querySelector('.drawer');
+      if (drawer.classList.contains('open')) {
+         drawer.classList.remove('open');
+      }
+   }

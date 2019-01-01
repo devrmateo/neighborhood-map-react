@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import LocationsList from './components/locations';
 import Map from './components/mapDisplay';
 import './App.css';
-import {getGoogleMaps, getPlaces} from './utils';
+import {getGoogleMaps, getPlaces, toggleDrawer, closeDrawer} from './utils';
 
 class App extends Component {
 
@@ -124,20 +124,8 @@ class App extends Component {
     this.populateInfoWindow(filtered, this.infowindow);
     filtered.setAnimation(window.google.maps.Animation.BOUNCE);
     setTimeout(() => {filtered.setAnimation(-1)}, 725);
-    this.closeDrawer();
+    closeDrawer();
   }
-
-  toggleDrawer = () => {
-        const drawer = document.querySelector('.drawer');
-        drawer.classList.toggle('open');
-  }
-
-  closeDrawer = () => {
-      const drawer = document.querySelector('.drawer');
-      if (drawer.classList.contains('open')) {
-         drawer.classList.remove('open');
-      }
-   }
 
   render() {
     return (
@@ -147,10 +135,10 @@ class App extends Component {
           filtered={this.state.filtered}
           filterLocations={this.filterLocations}
           onListItemClick={this.onListItemClick}
-          toggleDrawer={this.toggleDrawer}
+          toggleDrawer={toggleDrawer}
         />
         <Map
-          closeDrawer={this.closeDrawer}
+          closeDrawer={closeDrawer}
         />
       </div>
     );
