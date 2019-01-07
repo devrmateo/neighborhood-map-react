@@ -15,6 +15,10 @@
 
      }
 
+     .fourSquare {
+          margin-left: .25em;
+     }
+
      .listItem {
           font-size: 1em;
           padding-left: .25em;
@@ -42,6 +46,14 @@
           transform: translate(0, 0);
      }
 
+     .drawer, nav, button {
+          background: #C4EBB4;
+     }
+
+     .fourSquare {
+          margin-left: .75em;
+     }
+
      .listItem {
           font-size: 1em;
           padding-left: .5em;
@@ -50,10 +62,6 @@
 
      .listItem:last-of-type {
           border-bottom: none;
-     }
-
-     .drawer, nav, button {
-          background: #C4EBB4;
      }
 
      input {
@@ -97,15 +105,23 @@ input {
      margin-top: 0;
 }
 
+input::placeholder {
+     color: #45494f;
+     font-style: italic;
+}
+
 .fourSquare {
-     margin-left: .25em;
-     font-size: .7em;
+     font-size: .6em;
 }
 
 .open {
      z-index: 1000;
      -webkit-transform: translate(0, 0);
      transform: translate(0, 0);
+}
+
+nav {
+     border-radius: 5px;
 }
 
 .locationsList {
