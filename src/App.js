@@ -130,6 +130,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <h1 className="title">Around the Neighborhood</h1>
+        <h4 className="subtitle">Things to do in Agoura Hills, California</h4>
         <LocationsList
           query={this.state.query}
           filtered={this.state.filtered}

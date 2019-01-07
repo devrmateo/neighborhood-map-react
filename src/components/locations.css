@@ -9,6 +9,7 @@
           position: absolute;
           width: 200px;
           padding-left: 2em;
+          border-radius: 5px;
           -webkit-transform: translate(-200px, 0);
           transform: translate(-200px, 0);
 
@@ -17,6 +18,15 @@
      .listItem {
           font-size: 1em;
           padding-left: .25em;
+          border-bottom: 1px solid #E8E8E8;
+     }
+
+     .listItem:last-of-type {
+          border-bottom: none;
+     }
+
+     .open, nav, button {
+          background: #FEEAA5;
      }
 }
 
@@ -34,9 +44,27 @@
 
      .listItem {
           font-size: 1em;
-          padding-left: .25em;
+          padding-left: .5em;
+          border-bottom: 1px solid #E8E8E8;
+     }
+
+     .listItem:last-of-type {
+          border-bottom: none;
+     }
+
+     .drawer, nav, button {
+          background: #C4EBB4;
+     }
+
+     input {
+          margin-left: .5em;
      }
 }
+
+ .drawer {
+          padding-top: .5em;
+          border-radius: 5px;
+     }
 
 .locationsHeader {
      margin-left: .5em;
@@ -76,7 +104,6 @@ input {
 
 .open {
      z-index: 1000;
-     background: white;
      -webkit-transform: translate(0, 0);
      transform: translate(0, 0);
 }
