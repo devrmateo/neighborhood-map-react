@@ -58,7 +58,7 @@ class App extends Component {
           filtered: venues,
         })
       })
-      .catch((error) => alert('There was an error loading the page.'));
+      .catch((error) => alert('There was an error loading the data.'));
   }
 
   filterLocations = (query) => {
