@@ -40,6 +40,7 @@ class App extends Component {
             lng: this.state.lng
           }
         });
+        this.streetViewService = new google.maps.StreetViewService();
         venues.forEach((venue) => {
           const marker = new google.maps.Marker({
             map: this.map,
