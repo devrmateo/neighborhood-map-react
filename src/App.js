@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import LocationsList from './components/locations';
 import Map from './components/mapDisplay';
 import './App.css';
-import {getGoogleMaps, getPlaces, toggleDrawer, closeDrawer} from './utils';
+import {getGoogleMaps, getPlaces, toggleDrawer, closeDrawer, getStreetView} from './utils';
 
 class App extends Component {
 
@@ -40,7 +40,6 @@ class App extends Component {
             lng: this.state.lng
           }
         });
-        this.streetViewService = new google.maps.StreetViewService();
         venues.forEach((venue) => {
           const marker = new google.maps.Marker({
             map: this.map,
@@ -91,12 +90,16 @@ class App extends Component {
     if (infowindow.marker !== marker) {
       // Clear the infowindow content to give the streetview time to load.
       const location = this.state.filtered.filter((location) => location.id === marker.id)[0];
+      console.log(location);
+      let streetview = getStreetView(location);
+      console.log(streetview);
 
       infowindow.setContent(`
                               <h3>${location.name}</h3>
                               <div>${location.location.formattedAddress[0]}</div>
                               <div>${location.location.formattedAddress[1]}</div>
                               <div>${location.location.formattedAddress[2]}</div>
+                              <img src="${streetview}" />
                               <p><em>Locations provided by FourSquare</em></p>
                             `);
       infowindow.marker = marker;

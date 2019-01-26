@@ -31,3 +31,7 @@ export function closeDrawer() {
          drawer.classList.remove('open');
       }
    }
+
+export function getStreetView(location) {
+  return `https://maps.googleapis.com/maps/api/streetview?size=150x150&location=${location.location.lat},${location.location.lng}&fov=90&heading=235&pitch=10&key=AIzaSyBYxtGxA3B4KgCSBExLmK_lD_lq5u-xkMA`
+}
