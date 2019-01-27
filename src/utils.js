@@ -6,7 +6,7 @@ export function getGoogleMaps() {
     };
     const script = document.createElement('script');
     const API = 'AIzaSyBYxtGxA3B4KgCSBExLmK_lD_lq5u-xkMA';
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${API}&callback=resolveGoogleMapsPromise`;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${API}&libraries=geometry&callback=resolveGoogleMapsPromise`;
     script.async = true;
     script.defer = true;
     document.body.appendChild(script);
@@ -31,7 +31,3 @@ export function closeDrawer() {
          drawer.classList.remove('open');
       }
    }
-
-export function getStreetView(location) {
-  return `https://maps.googleapis.com/maps/api/streetview?size=150x150&location=${location.location.lat},${location.location.lng}&fov=90&heading=235&pitch=10&key=AIzaSyBYxtGxA3B4KgCSBExLmK_lD_lq5u-xkMA`
-}

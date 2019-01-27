@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import LocationsList from './components/locations';
 import Map from './components/mapDisplay';
 import './App.css';
-import {getGoogleMaps, getPlaces, toggleDrawer, closeDrawer, getStreetView} from './utils';
+import {getGoogleMaps, getPlaces, toggleDrawer, closeDrawer} from './utils';
 
 class App extends Component {
 
@@ -91,17 +91,7 @@ class App extends Component {
       // Clear the infowindow content to give the streetview time to load.
       const location = this.state.filtered.filter((location) => location.id === marker.id)[0];
       console.log(location);
-      let streetview = getStreetView(location);
-      console.log(streetview);
 
-      infowindow.setContent(`
-                              <h3>${location.name}</h3>
-                              <div>${location.location.formattedAddress[0]}</div>
-                              <div>${location.location.formattedAddress[1]}</div>
-                              <div>${location.location.formattedAddress[2]}</div>
-                              <img src="${streetview}" />
-                              <p><em>Locations provided by FourSquare</em></p>
-                            `);
       infowindow.marker = marker;
 
       // Make sure the marker property is cleared if the infowindow is closed.
@@ -115,6 +105,53 @@ class App extends Component {
         infowindow.marker = null;
         marker.setAnimation(-1);
       })
+
+          var streetViewService = new window.google.maps.StreetViewService();
+          var radius = 50;
+          // In case the status is OK, which means the pano was found, compute the
+          // position of the streetview image, then calculate the heading, then get a
+          // panorama from that and set the options
+          function getStreetView(data, status) {
+            if (status === window.google.maps.StreetViewStatus.OK) {
+              var nearStreetViewLocation = data.location.latLng;
+              console.log(data);
+
+              let locationLatLng = new window.google.maps.LatLng(-34, 151);
+              var heading = window.google.maps.geometry.spherical.computeHeading(
+                nearStreetViewLocation, locationLatLng);
+              infowindow.setContent(`
+                              <h3>${location.name}</h3>
+                              <div>${location.location.formattedAddress[0]}</div>
+                              <div>${location.location.formattedAddress[1]}</div>
+                              <div>${location.location.formattedAddress[2]}</div>
+                              <div id="pano"></div>
+                              <p><em>Locations provided by FourSquare</em></p>
+                            `);
+                var panoramaOptions = {
+                  position: nearStreetViewLocation,
+                  pov: {
+                    heading: heading,
+                    pitch: 30
+                  }
+                };
+             new window.google.maps.StreetViewPanorama(
+                document.getElementById('pano'), panoramaOptions);
+            } else {
+              infowindow.setContent(`
+                <h3>${location.name}</h3>
+                <div>${location.location.formattedAddress[0]}</div>
+                <div>${location.location.formattedAddress[1]}</div>
+                <div>${location.location.formattedAddress[2]}</div>
+                <div>No Street View Found</div>
+                <p><em>Locations provided by FourSquare</em></p>`
+                );
+            }
+          }
+          // Use streetview service to get the closest streetview image within
+          // 50 meters of the markers position
+          streetViewService.getPanoramaByLocation(({lat: location.location.lat, lng: location.location.lng}), radius, getStreetView);
+          // Open the infowindow on the correct marker.
+
 
       // Open the infowindow on the correct marker.
       infowindow.open(this.map, marker);
