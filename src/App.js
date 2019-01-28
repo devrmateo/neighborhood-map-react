@@ -85,7 +85,6 @@ class App extends Component {
 
 
   populateInfoWindow = (marker, infowindow) => {
-
     // Check to make sure the infowindow is not already opened on this marker.
     if (infowindow.marker !== marker) {
       // Clear the infowindow content to give the streetview time to load.
@@ -106,54 +105,57 @@ class App extends Component {
         marker.setAnimation(-1);
       })
 
-          var streetViewService = new window.google.maps.StreetViewService();
-          var radius = 50;
-          // In case the status is OK, which means the pano was found, compute the
-          // position of the streetview image, then calculate the heading, then get a
-          // panorama from that and set the options
-          function getStreetView(data, status) {
-            if (status === window.google.maps.StreetViewStatus.OK) {
-              var nearStreetViewLocation = data.location.latLng;
-              console.log(data);
+      const google = this.google;
+        var streetViewService = new google.maps.StreetViewService();
+        var radius = 50;
+        // In case the status is OK, which means the pano was found, compute the
+        // position of the streetview image, then calculate the heading, then get a
+        // panorama from that and set the options
+        function getStreetView(data, status) {
+          if (status === google.maps.StreetViewStatus.OK) {
+            const nearStreetViewLocation = data.location.latLng;
+            console.log(data);
 
-              let locationLatLng = new window.google.maps.LatLng(-34, 151);
-              var heading = window.google.maps.geometry.spherical.computeHeading(
-                nearStreetViewLocation, locationLatLng);
-              infowindow.setContent(`
-                              <h3>${location.name}</h3>
-                              <div>${location.location.formattedAddress[0]}</div>
-                              <div>${location.location.formattedAddress[1]}</div>
-                              <div>${location.location.formattedAddress[2]}</div>
-                              <div id="pano"></div>
-                              <p><em>Locations provided by FourSquare</em></p>
-                            `);
-                var panoramaOptions = {
-                  position: nearStreetViewLocation,
-                  pov: {
-                    heading: heading,
-                    pitch: 30
-                  }
-                };
-             new window.google.maps.StreetViewPanorama(
+
+            const locationLatLng = new google.maps.LatLng(location.location.lat, location.location.lng);
+            const heading = google.maps.geometry.spherical.computeHeading(
+              nearStreetViewLocation, locationLatLng);
+            infowindow.setContent(`
+                            <h3>${location.name}</h3>
+                            <div>${location.location.formattedAddress[0]}</div>
+                            <div>${location.location.formattedAddress[1]}</div>
+                            <div>${location.location.formattedAddress[2]}</div>
+                            <p><em>Locations provided by FourSquare</em></p>
+                            <div id="pano"></div>
+                          `);
+              const panoramaOptions = {
+                position: nearStreetViewLocation,
+                pov: {
+                  heading: heading,
+                  pitch: 30
+                },
+                visible: true
+              };
+            new google.maps.StreetViewPanorama(
                 document.getElementById('pano'), panoramaOptions);
             } else {
-              infowindow.setContent(`
-                <h3>${location.name}</h3>
-                <div>${location.location.formattedAddress[0]}</div>
-                <div>${location.location.formattedAddress[1]}</div>
-                <div>${location.location.formattedAddress[2]}</div>
-                <div>No Street View Found</div>
-                <p><em>Locations provided by FourSquare</em></p>`
-                );
-            }
+            infowindow.setContent(`
+              <h3>${location.name}</h3>
+              <div>${location.location.formattedAddress[0]}</div>
+              <div>${location.location.formattedAddress[1]}</div>
+              <div>${location.location.formattedAddress[2]}</div>
+              <div>No Street View Found</div>
+              <p><em>Locations provided by FourSquare</em></p>`
+              );
           }
-          // Use streetview service to get the closest streetview image within
-          // 50 meters of the markers position
-          streetViewService.getPanoramaByLocation(({lat: location.location.lat, lng: location.location.lng}), radius, getStreetView);
-          // Open the infowindow on the correct marker.
+        }
+        // Use streetview service to get the closest streetview image within
+        // 50 meters of the markers position
+        streetViewService.getPanoramaByLocation(({lat: location.location.lat, lng: location.location.lng}), radius, getStreetView);
+        // Open the infowindow on the correct marker.
 
 
-      // Open the infowindow on the correct marker.
+    // Open the infowindow on the correct marker.
       infowindow.open(this.map, marker);
     }
   }
